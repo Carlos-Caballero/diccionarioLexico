@@ -13,6 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Diccionario {
+    Hashtable<String,String> dic = new Hashtable<>();
+    ArrayList<String> lista = new ArrayList<>();
 
     public Diccionario(){
         dic.put("(","Simbolo de agrupacion (apertura)");
@@ -34,9 +36,28 @@ public class Diccionario {
         dic.put("-","Operador matematico (resta)");
         dic.put("+","Operador matematico (suma)");
         dic.put("=","Simbolo de asignacion");
+
+        lista.add(" ");
+        lista.add("\"");
+        lista.add("\\+");
+        lista.add("\\(");
+        lista.add("\\)");
+        lista.add("\\{");
+        lista.add("\\}");
+        lista.add("\\<");
+        lista.add("\\>");
+        lista.add("\\&");
+        lista.add("\\|");
+        lista.add("\\;");
+        lista.add("\\!");
+        lista.add("\\/");
+        lista.add("\\*");
+        lista.add("\\-");
+        lista.add("\\+");
+        lista.add("\\=");
     };
 
-    Hashtable<String,String> dic = new Hashtable<>();
+
 
 
     public ArrayList<String> getStaticKeys(){
@@ -92,12 +113,23 @@ public class Diccionario {
         p = Pattern.compile("^[A-Za-z]+");
         m = p.matcher(entrada);
         if (m.find()) inicio = true;
-        p = Pattern.compile(" ");
-        m = p.matcher(entrada);
-        if (!m.find() && inicio) return "Variable";
+        //p = Pattern.compile(" ");
+        //m = p.matcher(entrada);
+        int contador = 0;
+        boolean simbolo = false;
+        while (contador < lista.size()){
+            p = Pattern.compile(lista.get(contador));
+            m = p.matcher(entrada);
+            if(m.find()){
+                simbolo = true;
+                contador = lista.size();
+            }
+            contador++;
+        }
+
+        if (inicio && !simbolo) return "Variable";
 
         //valida que sea string
-        boolean fin;
         p = Pattern.compile("^\"");
         m = p.matcher(entrada);
         if (m.find()){
@@ -105,7 +137,7 @@ public class Diccionario {
             if(entrada.charAt(ultimo)=='\"' && entrada.length()>=2) return "Cadena";
         };
 
-        return "";
+        return null;
     }
 
     public boolean existe(String entrada){
@@ -120,8 +152,6 @@ public class Diccionario {
         //valida que sea double
         if(isValidDouble(entrada)) return true;
 
-
-
         //valida que sea comentario
         Pattern p = Pattern.compile("^//");
         Matcher m = p.matcher(entrada);
@@ -132,9 +162,21 @@ public class Diccionario {
         p = Pattern.compile("^[A-Za-z]+");
         m = p.matcher(entrada);
         if (m.find()) inicio = true;
-        p = Pattern.compile(" ");
-        m = p.matcher(entrada);
-        if (!m.find() && inicio) return true;
+        //p = Pattern.compile(" ");
+        //m = p.matcher(entrada);
+        int contador = 0;
+        boolean simbolo = false;
+        while (contador < lista.size()){
+            p = Pattern.compile(lista.get(contador));
+            m = p.matcher(entrada);
+            if(m.find()){
+                simbolo = true;
+                contador = lista.size();
+            }
+            contador++;
+        }
+
+        if (inicio && !simbolo) return true;
 
         //valida que sea string
         boolean fin;
