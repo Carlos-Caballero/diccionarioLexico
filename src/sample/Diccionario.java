@@ -60,7 +60,7 @@ public class Diccionario {
             lista.add(elements.nextElement());
         }
 
-        lista.add("Digito");
+        lista.add("Entero");
         lista.add("Double");
         lista.add("Comentario");
         lista.add("Variable");
@@ -75,8 +75,8 @@ public class Diccionario {
         //valida que exista la entrada
         if (dic.containsKey(entrada)) return dic.get(entrada);
 
-        //valida que sea digito
-        if (entrada.matches("[0-9]+")) return "Digito";
+        //valida que sea entero
+        if (entrada.matches("[0-9]+")) return "Entero";
 
         //valida que sea double
         if(isValidDouble(entrada)) return "Double";
@@ -114,7 +114,7 @@ public class Diccionario {
         //valida que exista la entrada
         if (dic.containsKey(entrada)) return true;
 
-        //valida que sea digito
+        //valida que sea entero
         if (entrada.matches("[0-9]+")) return true;
 
         //valida que sea double
@@ -191,26 +191,4 @@ public class Diccionario {
         return Pattern.matches(fpRegex, s);
     }
 
-
-    public void initialize() {
-        dic.put("(","Simbolo de agrupacion (apertura)");
-        dic.put(")","Simbolo de agrupacion (cierre)");
-        dic.put("{","Simbolo de agrupacion (apertura)");
-        dic.put("}","Simbolo de agrupacion (cierre)");
-        dic.put("<","Simbolo relacional (menor que)");
-        dic.put(">","Simbolo relacional (mayor que)");
-        dic.put("==","Simbolo relacional (igual a)");
-        dic.put("!=","Simbolo relacional (diferente de)");
-        dic.put("&","Operador logico (and)");
-        dic.put("|","Operador logico (or)");
-        dic.put(";","Simbolo de terminacion de linea de codigo");
-        dic.put("!","Simbolo de negacion");
-        dic.put("<=","Simbolo relacional (menor o igual que)");
-        dic.put(">=","Simbolo relacional (mayor o igual que)");
-        dic.put("/","Operador matematico (division)");
-        dic.put("*","Operador matematico (multiplicacion)");
-        dic.put("-","Operador matematico (resta)");
-        dic.put("+","Operador matematico (suma)");
-        dic.put("=","Simbolo de asignacion");
-    }
 }
