@@ -109,7 +109,13 @@ public class Diccionario {
         if (m.find()) return "Comentario";
 
         //valida que sea variable
-        boolean inicio = false;
+        p = Pattern.compile("^[A-Za-z]+");
+        m = p.matcher(entrada);
+        if (m.find()){
+
+            if(entrada.matches("[a-zA-Z0-9]+")) return "Cadena";
+        };
+        /*boolean inicio = false;
         p = Pattern.compile("^[A-Za-z]+");
         m = p.matcher(entrada);
         if (m.find()) inicio = true;
@@ -127,7 +133,7 @@ public class Diccionario {
             contador++;
         }
 
-        if (inicio && !simbolo) return "Variable";
+        if (inicio && !simbolo) return "Variable";*/
 
         //valida que sea string
         p = Pattern.compile("^\"");
